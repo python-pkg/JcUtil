@@ -3,7 +3,7 @@ from email.header import decode_header
 from bs4 import BeautifulSoup
 
 __copyright__    = 'Copyright (C) 2024 JavaCommons Technologies'
-__version__      = '0.0.1'
+__version__      = '0.0.2'
 __license__      = 'MIT'
 __author__       = 'JavaCommons Technologies'
 __author_email__ = 'javacommmons@gmail.com'
@@ -14,8 +14,11 @@ class JcFile:
     def __init__(self):
         pass
     def read_all_text(self, path):
-        file = open(path, "rt")
+        file = open(path, "rb")
         content = file.read()
+        content = content.decode()
+        jcstr = JcString()
+        content = jcstr.adjust_new_line(content)
         file.close()
         return content
     def write_all_text(self, path, content):
